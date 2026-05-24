@@ -6,7 +6,8 @@
 - Primary infected host: 10.7.10.47 (DESKTOP-9PEA63H)
 - Domain Controller: 10.7.10.9 (WIN-S3WT6LGQFVX.coolweathercoat.com)
 - Active Directory domain: COOLWEATHERCOAT.COM
-- Observed protocols: LDAP, Kerberos, SMB2, NBNS, DNS, HTTP/HTTPS
+- Observed protocols: LDAP, Kerberos, SMB2, NBNS, DNS, HTTP
+    (DHCP, TCP,UDP, ARP,DNS, HTTP, TLS1.2, LDAP,CLDAP, DCERPC, DRSUAPI, EPM, IGMPv3,KRB5, LSARPC,MDNS,NBNS,NTP,RPC_NETLOGON, SMB,SMB2) 
 - Infection severity: Critical
 - Potential attacker objectives:
   - Active Directory reconnaissance
@@ -28,11 +29,16 @@
 - NetBIOS workstation advertisement
 
 ## Potential C2 Characteristics
-- Repeated outbound communications should be validated using:
-  - http.request.method == "POST"
+- Repeated outbound communications were validated using:
   - dns
   - tls
-
+- Periodic Connections (BEACONING) was observed with multiple TCP connections
+  - !(ip.dst == 10.0.0.0/8) && !(ip.dst == 172.16.0.0/12) && !(ip.dst == 192.168.0.0/16)
+  - tcp.flags.syn == 1 && tcp.flags.ack == 0
+- DNS query Frequency:
+  - dns.qry.name
+- Large outbound payloads
+  - tcp.len > 1000 
 ## Immediate Containment Recommendations
 - Isolate host 10.7.10.47
 - Reset credentials associated with authenticated sessions
@@ -50,8 +56,10 @@
 
 ## Quick Validation Filters
 - ldap
-- kerberos
-- smb2
 - nbns
-- kerberos.msg_type == 12
-- smb2.tree contains "ADMIN$"
+- smb2
+- smb2.cmd == 5
+- smb2.tree contains "IPC$"
+- kerberos
+- kerberos.msg_type == 1
+- dcerpc
