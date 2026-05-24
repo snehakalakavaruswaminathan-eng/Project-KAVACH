@@ -17,7 +17,7 @@
   - SMB-based lateral movement
   - Command-and-control beaconing
 
-## High Confidence Findings
+## Findings
 - LDAP bind requests using SASL/GSS-SPNEGO observed from 10.7.10.47 to Domain Controller.
 - Kerberos pre-authentication negotiation observed via KRB-ERROR PREAUTH_REQUIRED.
 - SMB2 Session Setup Requests toward Domain Controller over TCP/445.
@@ -25,11 +25,13 @@
 - Internal AD discovery activity strongly suggests post-compromise reconnaissance.
 
 ## Potential Lateral Movement Indicators
-- SMB2 Session Setup to Domain Controller
 - LDAP authenticated queries
-- Kerberos service negotiation
 - NetBIOS workstation advertisement
-
+- SMB2 Session Setup to Domain Controller
+- Kerberos service negotiation - TGS Requests (Kerberoasting)
+  kerberos.msg_type == 12 -  12 packets
+- AS-REQ Without Preauthentication (AS-REP Roasting)
+kerberos.msg_type == 10 - 14 Packets
 ## Potential C2 Characteristics
 - Repeated outbound communications were validated using:
   - dns
@@ -41,6 +43,8 @@
   - dns.qry.name
 - Large outbound payloads
   - tcp.len > 1000 
+- Replication Interface Enumeration :
+-     DRSUAPI
 ## Immediate Containment Recommendations
 - Isolate host 10.7.10.47
 - Reset credentials associated with authenticated sessions
@@ -51,10 +55,11 @@
 
 ## Key Packet References
 - Frame 18: LDAP Netlogon response
-- Frame 19: NBNS workstation registration
-- Frame 189: LDAP SASL bind request
+- Frame 19: Workstation discovery - NBNS workstation registration
+- Frame 89 - RPC endpoint negotiation
+- Frame 189: Authenticated AD interaction - LDAP SASL bind request
 - Frame 194: SMB2 Session Setup
-- Frame 195: Kerberos PREAUTH_REQUIRED response
+- Frame 195: Domain authentication negotiation - Kerberos PREAUTH_REQUIRED response 
 
 ## Quick Validation Filters
 - ldap
