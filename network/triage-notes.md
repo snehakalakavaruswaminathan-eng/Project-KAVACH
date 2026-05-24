@@ -5,6 +5,8 @@
 - Suspected malware family: ICEID / BokBot
 - Primary infected host: 10.7.10.47 (DESKTOP-9PEA63H)
 - Domain Controller: 10.7.10.9 (WIN-S3WT6LGQFVX.coolweathercoat.com)
+- Source MAC: 80 86 5b ab 1e c4
+- Dest MAC: FF:FF:FF:FF:FF:FF
 - Active Directory domain: COOLWEATHERCOAT.COM
 - Observed protocols: LDAP, Kerberos, SMB2, NBNS, DNS, HTTP
     (DHCP, TCP,UDP, ARP,DNS, HTTP, TLS1.2, LDAP,CLDAP, DCERPC, DRSUAPI, EPM, IGMPv3,KRB5, LSARPC,MDNS,NBNS,NTP,RPC_NETLOGON, SMB,SMB2) 
