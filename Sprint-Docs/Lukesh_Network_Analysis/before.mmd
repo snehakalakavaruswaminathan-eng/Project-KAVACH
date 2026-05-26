@@ -1,0 +1,48 @@
+---
+title: Meridian FinServe — Current Network Architecture (Vulnerable)
+---
+graph TD
+    Internet(["🌐 Internet"])
+
+    subgraph Perimeter ["Perimeter — No Egress Filtering"]
+        FW["Firewall\n(Ingress only rules)"]
+    end
+
+    subgraph DMZ ["DMZ"]
+        Portal["Customer Portal\nSQL Injectable\nIDOR present"]
+        PartnerPortal["Partner Portal\nMerchant Onboarding"]
+    end
+
+    subgraph Internal ["Internal Network — Flat / No East-West Controls"]
+        WorkstationSegment["Workstation Segment\n10.7.10.0/24\nDESKTOP-9PEA63H (infected)"]
+        ServerSegment["Server Segment\n(anomalous traffic observed)"]
+        DC["Domain Controller\nWIN-S3WT6LGQFVX\n10.7.10.9\nDCSync exposed to workstations"]
+    end
+
+    subgraph CloudFootprint ["Public Cloud (small footprint)"]
+        Cloud["Cloud Services\nNo network monitoring"]
+    end
+
+    Internet --> FW
+    FW --> Portal
+    FW --> PartnerPortal
+    FW --> WorkstationSegment
+
+    WorkstationSegment <-->|"SMB, LDAP, Kerberos\nNo restrictions"| DC
+    WorkstationSegment <-->|"DRSUAPI DCSync\nNo controls"| DC
+    WorkstationSegment <-->|"Unrestricted"| ServerSegment
+    ServerSegment <--> DC
+
+    WorkstationSegment -->|"No egress filtering\nAny port, any destination"| Internet
+
+    style WorkstationSegment fill:#ff9999,stroke:#cc0000
+    style DC fill:#ffcc99,stroke:#cc6600
+    style Portal fill:#ff9999,stroke:#cc0000
+    style FW fill:#ffcc99,stroke:#cc6600
+
+    %% Attack path annotations
+    Internet -->|"1. Phishing/dropper delivery"| WorkstationSegment
+    WorkstationSegment -->|"2. PowerShell C2 check-in\n623start.site:80"| Internet
+    WorkstationSegment -->|"3. Payload download\nguiatelefonos.com:443"| Internet
+    WorkstationSegment -->|"4. IcedID C2 beacon\n194.26.135.119:12432"| Internet
+    WorkstationSegment -->|"5. DCSync credential dump"| DC
