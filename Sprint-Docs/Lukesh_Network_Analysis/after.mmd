@@ -1,0 +1,59 @@
+---
+title: Meridian FinServe — Hardened Network Architecture (Proposed)
+---
+graph TD
+    Internet(["🌐 Internet"])
+
+    subgraph Perimeter ["Perimeter — Egress + Ingress Filtering"]
+        NGFW["Next-Gen Firewall\nEgress filtering enabled\nDeny-by-default outbound\nGeo-blocking active"]
+        WAF["WAF\nOWASP ruleset\nRate limiting"]
+        DNSFirewall["DNS Firewall / RPZ\nBlocks C2 domains\nLogs all queries"]
+    end
+
+    subgraph DMZ ["DMZ — Hardened"]
+        Portal["Customer Portal\nParameterised queries\nPer-request authZ\nCSP headers"]
+        PartnerPortal["Partner Portal\nMFA enforced\nSession controls"]
+    end
+
+    subgraph WorkstationZone ["Workstation Zone — Segmented"]
+        Workstations["Workstations\n10.7.10.48-254\nNo direct DC access\nNo DRSUAPI allowed"]
+        EDR["EDR Agent\nProcess monitoring\nPowerShell logging"]
+    end
+
+    subgraph ServerZone ["Server Zone — Microsegmented"]
+        AppServers["Application Servers\nWhitelisted ports only"]
+        JumpHost["Jump Host\nAdmin access only via MFA\nAll sessions logged"]
+    end
+
+    subgraph ControlZone ["Control Zone — Restricted"]
+        DC["Domain Controller\nDCSync restricted to DCs only\nPrivileged Access Workstation required\nLDAP signing enforced"]
+        SIEM["SIEM + NSM\nZeek + Suricata\nBaseline alerting\nC2 beacon detection"]
+    end
+
+    subgraph CloudFootprint ["Public Cloud — Monitored"]
+        Cloud["Cloud Services\nCloud-native logging\nNetwork flow logs enabled"]
+    end
+
+    Internet --> NGFW
+    NGFW --> WAF
+    WAF --> Portal
+    WAF --> PartnerPortal
+    NGFW --> DNSFirewall
+    DNSFirewall --> WorkstationZone
+
+    WorkstationZone -->|"Kerberos only\nNo DRSUAPI"| DC
+    WorkstationZone -->|"Monitored\nWhitelisted"| AppServers
+    JumpHost -->|"Privileged access only\nMFA required"| DC
+
+    WorkstationZone -->|"Egress: approved\ndomains only\nPort 80/443 only"| NGFW
+    AppServers --> NGFW
+
+    SIEM -.->|"Monitors all segments"| WorkstationZone
+    SIEM -.->|"Monitors"| ServerZone
+    SIEM -.->|"Monitors"| ControlZone
+
+    style WorkstationZone fill:#99ff99,stroke:#006600
+    style ControlZone fill:#99ccff,stroke:#003399
+    style SIEM fill:#ccccff,stroke:#6666cc
+    style DNSFirewall fill:#99ff99,stroke:#006600
+    style NGFW fill:#99ff99,stroke:#006600
