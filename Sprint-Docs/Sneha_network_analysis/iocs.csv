@@ -1,0 +1,8 @@
+IOC_Type,Value,Protocol,Source,Destination,Malware_stage,Confidence,Description,Wireshark_filter,
+IP,10.7.10.47,LDAP/SMB/Kerberos,10.7.10.47,10.7.10.9,Post-compromise,High,Workstation interacting with AD infrastructure,ip.addr == 10.7.10.47,
+IP,10.7.10.9,LDAP/SMB/Kerberos,10.7.10.47,10.7.10.9,Infrastructure,High,Domain Controller,ip.addr == 10.7.10.9,
+Domain,COOLWEATHERCOAT.COM,Kerberos,10.7.10.9,10.7.10.47,Authentication,High,Kerberos realm identified in Frame 195,kerberos,
+Hostname,DESKTOP-9PEA63H,NBNS,10.7.10.47,10.7.10.255,Discovery,Medium,NBNS workstation registration,nbns,
+Protocol,LDAP SASL Bind,LDAP,10.7.10.47,10.7.10.9,Reconnaissance,High,Authenticated LDAP bind using GSS-SPNEGO,"ldap contains ""GSS-SPNEGO""",
+Protocol,SMB2 Session Setup,SMB2,10.7.10.47,10.7.10.9,Lateral Movement Prep,Medium,SMB authentication negotiation,smb2.cmd == 1,
+Kerberos,PREAUTH_REQUIRED,Kerberos,10.7.10.9,10.7.10.47,Authentication,High,Kerberos pre-authentication challenge,kerberos.error_code == 25,
