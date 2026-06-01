@@ -21,7 +21,7 @@ The assessment identified multiple security misconfigurations, insecure cookie s
 | Testing Tool | OWASP ZAP 2.17 |
 | Testing Type | Passive Security Assessment |
 | Platform | Kali Linux |
-| Assessment Date | YYYY-MM-DD |
+| Assessment Date | 2026-05-31 |
 
 ---
 
