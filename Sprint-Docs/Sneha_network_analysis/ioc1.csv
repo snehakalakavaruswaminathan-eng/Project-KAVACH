@@ -1,5 +1,3 @@
-
-```csv
 ioc_type,value,protocol,source,destination,malware_stage,confidence,description,wireshark_filter
 IP,10.7.10.47,Multiple,10.7.10.47,Multiple,Victim_HOST,HIGH,Infected workstation - DESKTOP-9PEA63H,ip.addr == 10.7.10.47
 IP,10.7.10.9,Multiple,10.7.10.47,10.7.10.9,Infrastructure,HIGH,Domain Controller - WIN-S3WT6LGQFVX.coolweathercoat.com,ip.addr == 10.7.10.9
