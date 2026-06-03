@@ -39,4 +39,4 @@ Filename,Scan_Inv.zip,SMB/HTTP,Multiple,10.7.10.47,Initial_Delivery,HIGH,Initial
 Filename,Invoice_07-19-2023.zip,SMB,192.168.1.101,10.7.10.47,Initial_Delivery,HIGH,Alternative initial attachment filename (malspam),frame contains "Invoice_07-19-2023.zip"
 File_Hash,MD5:SHA1:SHA256,Multiple,10.7.10.47,Multiple,Payload,Medium,Extract from PCAP using NetworkMiner (compute during analysis),frame contains
 JA3,a0e9f5d64349fb13191bc781f81f42e1,TLS,10.7.10.47,Multiple,C2_Encryption,Medium,IcedID JA3 fingerprint (client TLS),tls.handshake.ja3 == "a0e9f5d64349fb13191bc781f81f42e1"
-JA3S,452e969c51882628dac65e38aff0f8e5ebee6e6b,TLS,Multiple,10.7.10.47,C2_Encryption,Medium,IcedID self-signed certificate fingerprint,tls.handshake.certificate matches "452e969c51882628dac65e38aff0f8e5ebee6e6b"
+JA3S,452e969c51882628dac65e38aff0f8e5ebee6e6b,TLS,Multiple,10.7.10.47,C2_Encryption,Medium,IcedID self-signed certificate fingerprint,tls.handshake.certificate matches "452e969c51882628dac65e38aff0f8e5ebee6e6b",
