@@ -1,5 +1,5 @@
 ioc_type,value,protocol,source,destination,malware_stage,confidence,description,wireshark_filter,
-IP,10.7.10.47,Multiple,10.7.10.47,Multiple,Victim_HOST,HIGH,Infected workstation - DESKTOP-9PEA63H,ip.addr == 10.7.10.47,,
+IP,10.7.10.47,Multiple,10.7.10.47,Multiple,Victim_HOST,HIGH,Infected workstation - DESKTOP-9PEA63H,ip.addr == 10.7.10.47,
 IP,10.7.10.9,Multiple,10.7.10.47,10.7.10.9,Infrastructure,HIGH,Domain Controller - WIN-S3WT6LGQFVX.coolweathercoat.com,ip.addr == 10.7.10.9,
 IP,80.77.24.175,HTTP,10.7.10.47,80.77.24.175,Initial_Delivery,HIGH,Initial redirector - serves /main.php that redirects to Firebase,ip.dst == 80.77.24.175,
 IP,192.153.57.223,HTTP,10.7.10.47,192.153.57.223,IcedID_Loader,HIGH,IcedID loader C2 - skigimeetroc.com (gzip payload returned),ip.dst == 192.153.57.223,
