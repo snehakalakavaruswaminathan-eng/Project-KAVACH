@@ -1,9 +1,4 @@
 
----
-
-## File 2: network/hypotheses.md
-
-```markdown
 # Investigative Hypotheses - ICEID Infection with AD Reconnaissance
 
 ## Hypothesis 1: Initial Delivery via Malspam with HTTP Redirect Chain
