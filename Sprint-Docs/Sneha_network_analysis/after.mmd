@@ -1,0 +1,108 @@
+flowchart LR
+
+subgraph Victim["COMPROMISED ENVIRONMENT (10.7.10.0/24)"]
+
+WS["Victim Workstation
+10.7.10.47
+
+DESKTOP-9PEA63H
+
+ICEID Running
+PowerShell Executed
+Credentials Exposed"]
+
+DC["Domain Controller
+10.7.10.9
+
+WIN-S3WT6LGQFVX
+
+AD DS
+LDAP
+Kerberos
+Global Catalog
+
+DRSUAPI Exposed"]
+
+FS["File Server
+
+SMB2
+SYSVOL
+NETLOGON
+
+Potential Lateral Movement"]
+
+FW["Firewall / Proxy
+10.7.10.1
+
+Outbound Allowed"]
+
+end
+
+subgraph Attacker["ATTACKER INFRASTRUCTURE"]
+
+R1["80.77.24.175
+
+/main.php
+
+Redirector"]
+
+Firebase["firebasestorage.googleapis.com
+
+Scan_Inv.zip"]
+
+PS["623start.site
+
+status=start
+status=install"]
+
+Payload["guiatelefonos.com
+
+/data/czx.jpg
+
+IcedID Binary"]
+
+C2A["192.153.57.223
+
+skigimeetroc.com"]
+
+C2B["104.168.53.18
+
+askamoshopsi.com"]
+
+C2C["217.199.121.56
+
+skansnekssky.com"]
+
+C2D["194.26.135.119:12432
+
+Custom TCP C2"]
+
+end
+
+WS -->|"GET /main.php"| R1
+R1 -->|"Redirect"| Firebase
+
+Firebase -->|"Scan_Inv.zip"| WS
+
+WS -->|"PowerShell UA"| PS
+
+PS -->|"Download Payload"| Payload
+
+Payload -->|"Install ICEID"| WS
+
+WS -->|"Custom TCP 12432"| C2D
+WS -->|"Beaconing"| C2A
+WS -->|"Beaconing"| C2B
+WS -->|"Beaconing"| C2C
+
+WS -->|"LDAP Enumeration"| DC
+WS -->|"Kerberos TGT Requests"| DC
+WS -->|"DRSUAPI Bind"| DC
+
+WS -->|"SMB Recon"| FS
+
+classDef compromised fill:#ffd6d6
+classDef attacker fill:#ffe8c2
+
+class WS,DC,FS,FW compromised
+class R1,Firebase,PS,Payload,C2A,C2B,C2C,C2D attacker
