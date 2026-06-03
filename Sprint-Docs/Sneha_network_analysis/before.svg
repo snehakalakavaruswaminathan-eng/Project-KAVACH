@@ -1,112 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="Arial, sans-serif">
-  <defs>
-    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#1976d2"/>
-    </marker>
-    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32"/>
-    </marker>
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.2"/>
-    </filter>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="internalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:0.3"/>
-      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:0.5"/>
-    </linearGradient>
-  </defs>
+flowchart LR
 
-  <rect width="1200" height="800" fill="url(#bgGrad)" stroke="#999" stroke-width="2"/>
-  
-  <text x="600" y="35" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Meridian FinServe / COOLWEATHERCOAT.COM</text>
-  <text x="600" y="55" text-anchor="middle" font-size="14" fill="#666">Network Architecture - BEFORE Compromise (Normal Operations)</text>
+subgraph Internal_Network["INTERNAL NETWORK TRUST BOUNDARY (10.7.10.0/24)"]
 
-  <!-- Internal Trust Boundary -->
-  <rect x="50" y="80" width="700" height="680" fill="url(#internalGrad)" stroke="#2e7d32" stroke-width="3" stroke-dasharray="10,5" rx="10"/>
-  <text x="80" y="105" font-size="14" font-weight="bold" fill="#2e7d32">INTERNAL NETWORK TRUST BOUNDARY (10.7.10.0/24)</text>
+WS["User Workstation
+10.7.10.47
+DESKTOP-9PEA63H
+Windows 10 Enterprise
+Browser | Email | Office Apps"]
 
-  <!-- User Workstation -->
-  <rect x="80" y="280" width="200" height="130" rx="10" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="80" y="280" width="200" height="30" rx="10" fill="#555"/>
-  <rect x="80" y="300" width="200" height="10" fill="#555"/>
-  <text x="180" y="300" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">User Workstation</text>
-  <text x="180" y="330" text-anchor="middle" font-size="12" fill="#333">10.7.10.47</text>
-  <text x="180" y="348" text-anchor="middle" font-size="11" fill="#666">DESKTOP-9PEA63H</text>
-  <text x="180" y="366" text-anchor="middle" font-size="10" fill="#999">Windows 10 Enterprise</text>
-  <text x="180" y="384" text-anchor="middle" font-size="10" fill="#999">Browser • Email • Office Apps</text>
+DNS["Internal DNS
+10.7.10.9
+AD Integrated DNS"]
 
-  <!-- Internal DNS -->
-  <rect x="80" y="480" width="200" height="80" rx="10" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="80" y="480" width="200" height="25" rx="10" fill="#555"/>
-  <rect x="80" y="495" width="200" height="10" fill="#555"/>
-  <text x="180" y="498" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Internal DNS</text>
-  <text x="180" y="525" text-anchor="middle" font-size="11" fill="#333">10.7.10.9 (DC)</text>
-  <text x="180" y="543" text-anchor="middle" font-size="10" fill="#666">AD Integrated DNS</text>
+DC["Domain Controller
+10.7.10.9
+WIN-S3WT6LGQFVX
 
-  <!-- Domain Controller -->
-  <rect x="370" y="380" width="200" height="130" rx="10" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="370" y="380" width="200" height="30" rx="10" fill="#555"/>
-  <rect x="370" y="400" width="200" height="10" fill="#555"/>
-  <text x="470" y="400" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Domain Controller</text>
-  <text x="470" y="430" text-anchor="middle" font-size="12" fill="#333">10.7.10.9</text>
-  <text x="470" y="448" text-anchor="middle" font-size="11" fill="#666">WIN-S3WT6LGQFVX</text>
-  <text x="470" y="466" text-anchor="middle" font-size="10" fill="#999">AD DS • DNS • Kerberos • LDAP</text>
-  <text x="470" y="484" text-anchor="middle" font-size="10" fill="#999">Global Catalog • SMB2</text>
+AD DS
+DNS
+Kerberos
+LDAP
+Global Catalog
+SMB2"]
 
-  <!-- File Server -->
-  <rect x="370" y="580" width="200" height="100" rx="10" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="370" y="580" width="200" height="25" rx="10" fill="#555"/>
-  <rect x="370" y="595" width="200" height="10" fill="#555"/>
-  <text x="470" y="598" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">File Server</text>
-  <text x="470" y="625" text-anchor="middle" font-size="11" fill="#333">10.7.10.20 (example)</text>
-  <text x="470" y="643" text-anchor="middle" font-size="10" fill="#666">SMB2 • DFS Namespace</text>
-  <text x="470" y="661" text-anchor="middle" font-size="10" fill="#999">SYSVOL • NETLOGON</text>
+FS["File Server
+10.7.10.20
 
-  <!-- Firewall -->
-  <rect x="800" y="350" width="200" height="100" rx="10" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="800" y="350" width="200" height="25" rx="10" fill="#d32f2f"/>
-  <rect x="800" y="365" width="200" height="10" fill="#d32f2f"/>
-  <text x="900" y="368" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Firewall / Proxy</text>
-  <text x="900" y="395" text-anchor="middle" font-size="11" fill="#333">Gateway: 10.7.10.1</text>
-  <text x="900" y="413" text-anchor="middle" font-size="10" fill="#666">URL Filtering • IPS • DLP</text>
+SMB2
+DFS Namespace
+SYSVOL
+NETLOGON"]
 
-  <!-- Internet -->
-  <rect x="800" y="520" width="200" height="180" rx="15" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" stroke-dasharray="8,4"/>
-  <text x="900" y="550" text-anchor="middle" font-size="14" font-weight="bold" fill="#1976d2">INTERNET</text>
-  <text x="900" y="575" text-anchor="middle" font-size="10" fill="#666">Email (SMTP/IMAP)</text>
-  <text x="900" y="595" text-anchor="middle" font-size="10" fill="#666">Web Browsing (HTTP/HTTPS)</text>
-  <text x="900" y="615" text-anchor="middle" font-size="10" fill="#666">Cloud Services</text>
-  <text x="900" y="635" text-anchor="middle" font-size="10" fill="#666">DNS (8.8.8.8, 8.8.4.4)</text>
+FW["Firewall / Proxy
+10.7.10.1
 
-  <!-- LEGITIMATE TRAFFIC FLOWS -->
-  <!-- Workstation to DC: Kerberos -->
-  <path d="M 280 400 L 370 400" stroke="#1976d2" stroke-width="2" fill="none" marker-end="url(#arrow-blue)"/>
-  <text x="325" y="395" text-anchor="middle" font-size="9" fill="#1976d2">Kerberos (88)</text>
+URL Filtering
+IPS
+DLP"]
 
-  <!-- Workstation to DC: LDAP -->
-  <path d="M 280 430 L 370 430" stroke="#1976d2" stroke-width="2" fill="none" marker-end="url(#arrow-blue)"/>
-  <text x="325" y="425" text-anchor="middle" font-size="9" fill="#1976d2">LDAP (389)</text>
+end
 
-  <!-- Workstation to File Server: SMB -->
-  <path d="M 280 620 L 370 620" stroke="#1976d2" stroke-width="2" fill="none" marker-end="url(#arrow-blue)"/>
-  <text x="325" y="615" text-anchor="middle" font-size="9" fill="#1976d2">SMB2 (445)</text>
+Internet["Internet"]
 
-  <!-- Workstation to Firewall to Internet -->
-  <path d="M 280 500 L 550 500 L 550 400 L 800 400" stroke="#2e7d32" stroke-width="2" fill="none" marker-end="url(#arrow-green)"/>
-  <text x="640" y="490" text-anchor="middle" font-size="9" fill="#2e7d32">HTTP/HTTPS (80/443)</text>
+Cloud["Cloud Services"]
 
-  <!-- Legend -->
-  <rect x="50" y="680" width="350" height="70" rx="8" fill="#fff" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
-  <text x="65" y="698" font-size="11" font-weight="bold" fill="#333">Legend:</text>
-  <line x1="65" y1="715" x2="105" y2="715" stroke="#1976d2" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <text x="110" y="719" font-size="10" fill="#333">Legitimate Internal Traffic</text>
-  <line x1="65" y1="735" x2="105" y2="735" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"/>
-  <text x="110" y="739" font-size="10" fill="#333">Legitimate Outbound Traffic</text>
+WS -->|"Kerberos 88"| DC
+WS -->|"LDAP 389"| DC
+WS -->|"SMB2 445"| FS
+WS -->|"DNS Queries"| DNS
 
-  <!-- Title annotation -->
-  <text x="900" y="85" text-anchor="middle" font-size="11" fill="#999">No malicious traffic present</text>
-  <text x="900" y="100" text-anchor="middle" font-size="11" fill="#999">Normal enterprise AD environment</text>
-</svg>
+WS -->|"HTTP/HTTPS 80/443"| FW
+FW --> Internet
+
+Internet --> Cloud
+
+classDef internal fill:#d5f5d5
+class WS,DNS,DC,FS,FW internal
