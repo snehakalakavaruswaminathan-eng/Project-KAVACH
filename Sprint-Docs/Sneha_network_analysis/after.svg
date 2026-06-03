@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrow-red" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#d32f2f"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#ff6f00"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#7b1fa2"/>
+    </marker>
+    <marker id="arrow-black" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#333"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#eeeeee;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="compromised" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffebee;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#ffcdd2;stop-opacity:0.6"/>
+    </linearGradient>
+    <linearGradient id="attacker" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:0.6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="950" fill="url(#bgGrad)" stroke="#999" stroke-width="2"/>
+  
+  <text x="700" y="35" text-anchor="middle" font-size="22" font-weight="bold" fill="#d32f2f">ICEID (BokBot) - Full Attack Chain &amp; Compromised Architecture</text>
+  <text x="700" y="55" text-anchor="middle" font-size="13" fill="#666">AFTER Compromise - Infection Chain + C2 Infrastructure + AD Reconnaissance + DCSync Preparation</text>
+
+  <!-- Legend -->
+  <rect x="50" y="70" width="500" height="95" rx="8" fill="#fff" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
+  <text x="65" y="88" font-size="11" font-weight="bold" fill="#333">Legend:</text>
+  <line x1="65" y1="105" x2="105" y2="105" stroke="#d32f2f" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="110" y="109" font-size="10" fill="#333">Malicious HTTP/TLS Traffic (C2 &amp; Payload)</text>
+  <line x1="65" y1="125" x2="105" y2="125" stroke="#ff6f00" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <text x="110" y="129" font-size="10" fill="#333">DNS Queries / DGA / Malicious Resolution</text>
+  <line x1="65" y1="145" x2="105" y2="145" stroke="#7b1fa2" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <text x="110" y="149" font-size="10" fill="#333">Post-Compromise AD Reconnaissance (LDAP/Kerberos/DRSUAPI)</text>
+
+  <!-- ==================== VICTIM ENVIRONMENT ==================== -->
+  <rect x="40" y="180" width="620" height="730" rx="12" fill="url(#compromised)" stroke="#d32f2f" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="350" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#d32f2f">VICTIM ENVIRONMENT - COMPROMISED (10.7.10.0/24)</text>
+
+  <!-- Compromised Workstation -->
+  <rect x="60" y="240" width="220" height="150" rx="10" fill="#fff" stroke="#d32f2f" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="60" y="240" width="220" height="35" rx="10" fill="#d32f2f"/>
+  <rect x="60" y="265" width="220" height="10" fill="#d32f2f"/>
+  <text x="170" y="263" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Victim Workstation</text>
+  <text x="170" y="295" text-anchor="middle" font-size="11" font-weight="bold" fill="#d32f2f">10.7.10.47 - INFECTED</text>
+  <text x="170" y="315" text-anchor="middle" font-size="10" fill="#333">DESKTOP-9PEA63H</text>
+  <text x="170" y="333" text-anchor="middle" font-size="10" fill="#666">Windows 10 Enterprise</text>
+  <text x="170" y="351" text-anchor="middle" font-size="10" fill="#666">ICEID Malware Running</text>
+  <text x="170" y="369" text-anchor="middle" font-size="10" fill="#999">PowerShell Dropper Executed</text>
+  <text x="170" y="383" text-anchor="middle" font-size="9" fill="#999">Credentials Exposed to Attacker</text>
+
+  <!-- Domain Controller (Target) -->
+  <rect x="370" y="260" width="240" height="150" rx="10" fill="#fff" stroke="#7b1fa2" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="370" y="260" width="240" height="35" rx="10" fill="#7b1fa2"/>
+  <rect x="370" y="285" width="240" height="10" fill="#7b1fa2"/>
+  <text x="490" y="283" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Domain Controller (Target)</text>
+  <text x="490" y="315" text-anchor="middle" font-size="11" fill="#333">10.7.10.9</text>
+  <text x="490" y="333" text-anchor="middle" font-size="10" fill="#666">WIN-S3WT6LGQFVX</text>
+  <text x="490" y="351" text-anchor="middle" font-size="10" fill="#666">AD DS • KDC • LDAP • GC</text>
+  <text x="490" y="369" text-anchor="middle" font-size="10" fill="#999">DRSUAPI Interface Exposed</text>
+  <text x="490" y="383" text-anchor="middle" font-size="9" fill="#999">DCSync Risk: HIGH</text>
+
+  <!-- File Server -->
+  <rect x="370" y="480" width="240" height="110" rx="10" fill="#fff" stroke="#999" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="370" y="480" width="240" height="30" rx="10" fill="#555"/>
+  <rect x="370" y="500" width="240" height="10" fill="#555"/>
+  <text x="490" y="500" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">File Server</text>
+  <text x="490" y="528" text-anchor="middle" font-size="10" fill="#333">SMB2 • SYSVOL • NETLOGON</text>
+  <text x="490" y="546" text-anchor="middle" font-size="10" fill="#666">Potential Lateral Movement Target</text>
+  <text x="490" y="564" text-anchor="middle" font-size="10" fill="#999">No direct compromise observed</text>
+
+  <!-- Firewall -->
+  <rect x="370" y="640" width="240" height="100" rx="10" fill="#fff" stroke="#ff6f00" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="370" y="640" width="240" height="28" rx="10" fill="#ff6f00"/>
+  <rect x="370" y="660" width="240" height="8" fill="#ff6f00"/>
+  <text x="490" y="660" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Firewall / Proxy</text>
+  <text x="490" y="685" text-anchor="middle" font-size="10" fill="#333">10.7.10.1</text>
+  <text x="490" y="703" text-anchor="middle" font-size="10" fill="#666">Allowed Malicious Outbound Traffic</text>
+  <text x="490" y="721" text-anchor="middle" font-size="9" fill="#999">No egress filtering on port 12432</text>
+
+  <!-- ==================== ATTACKER INFRASTRUCTURE ==================== -->
+  <rect x="720" y="180" width="630" height="730" rx="12" fill="url(#attacker)" stroke="#ff6f00" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="1035" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff6f00">ATTACKER INFRASTRUCTURE (C2 &amp; Payload Hosting)</text>
+
+  <!-- Redirector -->
+  <rect x="750" y="260" width="260" height="110" rx="10" fill="#fff" stroke="#d32f2f" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="750" y="260" width="260" height="30" rx="10" fill="#d32f2f"/>
+  <rect x="750" y="280" width="260" height="10" fill="#d32f2f"/>
+  <text x="880" y="280" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Initial Redirector</text>
+  <text x="880" y="310" text-anchor="middle" font-size="11" fill="#333">80.77.24.175</text>
+  <text x="880" y="328" text-anchor="middle" font-size="10" fill="#666">GET /main.php</text>
+  <text x="880" y="346" text-anchor="middle" font-size="10" fill="#666">Redirects to Firebase Storage</text>
+
+  <!-- Firebase (Legitimate but Abused) -->
+  <rect x="1080" y="260" width="240" height="110" rx="10" fill="#fff" stroke="#ff6f00" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="1080" y="260" width="240" height="30" rx="10" fill="#ff6f00"/>
+  <rect x="1080" y="280" width="240" height="10" fill="#ff6f00"/>
+  <text x="1200" y="280" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Google Firebase</text>
+  <text x="1200" y="310" text-anchor="middle" font-size="11" fill="#333">firebasestorage.googleapis.com</text>
+  <text x="1200" y="328" text-anchor="middle" font-size="10" fill="#666">Hosts: Scan_Inv.zip</text>
+  <text x="1200" y="346" text-anchor="middle" font-size="10" fill="#999">Legitimate platform abused</text>
+
+  <!-- PowerShell C2 -->
+  <rect x="750" y="420" width="260" height="110" rx="10" fill="#fff" stroke="#d32f2f" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="750" y="420" width="260" height="30" rx="10" fill="#d32f2f"/>
+  <rect x="750" y="440" width="260" height="10" fill="#d32f2f"/>
+  <text x="880" y="440" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">PowerShell C2</text>
+  <text x="880" y="470" text-anchor="middle" font-size="11" fill="#333">623start.site</text>
+  <text x="880" y="488" text-anchor="middle" font-size="10" fill="#666">?status=start&av=Windows Defender</text>
+  <text x="880" y="506" text-anchor="middle" font-size="10" fill="#666">?status=install</text>
+  <text x="880" y="520" text-anchor="middle" font-size="9" fill="#999">PowerShell User-Agent</text>
+
+  <!-- Payload Hosting -->
+  <rect x="1080" y="420" width="240" height="110" rx="10" fill="#fff" stroke="#d32f2f" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="1080" y="420" width="240" height="30" rx="10" fill="#d32f2f"/>
+  <rect x="1080" y="440" width="240" height="10" fill="#d32f2f"/>
+  <text x="1200" y="440" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Payload Server</text>
+  <text x="1200" y="470" text-anchor="middle" font-size="11" fill="#333">guiatelefonos.com</text>
+  <text x="1200" y="488" text-anchor="middle" font-size="10" fill="#666">GET /data/czx.jpg</text>
+  <text x="1200" y="506" text-anchor="middle" font-size="10" fill="#666">IcedID binary (disguised as JPEG)</text>
+
+  <!-- IcedID C2 -->
+  <rect x="750" y="580" width="260" height="110" rx="10" fill="#fff" stroke="#d32f2f" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="750" y="580" width="260" height="30" rx="10" fill="#d32f2f"/>
+  <rect x="750" y="600" width="260" height="10" fill="#d32f2f"/>
+  <text x="880" y="600" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">IcedID C2 Servers</text>
+  <text x="880" y="628" text-anchor="middle" font-size="10" fill="#333">192.153.57.223 (skigimeetroc.com)</text>
+  <text x="880" y="646" text-anchor="middle" font-size="10" fill="#333">104.168.53.18 (askamoshopsi.com)</text>
+  <text x="880" y="664" text-anchor="middle" font-size="10" fill="#333">217.199.121.56 (skansnekssky.com)</text>
+  <text x="880" y="682" text-anchor="middle" font-size="10" fill="#333">194.26.135.119:12432</text>
+
+  <!-- ==================== ATTACK FLOW ARROWS ==================== -->
+
+  <!-- 1. Initial Redirect -->
+  <path d="M 280 310 L 750 310" stroke="#d32f2f" stroke-width="2.5" fill="none" marker-end="url(#arrow-red)"/>
+  <rect x="420" y="295" width="150" height="35" rx="5" fill="#fff" stroke="#d32f2f" stroke-width="1" opacity="0.95"/>
+  <text x="495" y="310" text-anchor="middle" font-size="9" font-weight="bold" fill="#d32f2f">HTTP GET /main.php</text>
+  <text x="495" y="322" text-anchor="middle" font-size="8" fill="#666">Redirect to Firebase</text>
+
+  <!-- 2. Firebase Download -->
+  <path d="M 280 340 L 1080 340" stroke="#ff6f00" stroke-width="2" fill="none" marker-end="url(#arrow-orange)"/>
+  <rect x="580" y="325" width="180" height="35" rx="5" fill="#fff" stroke="#ff6f00" stroke-width="1" opacity="0.95"/>
+  <text x="670" y="340" text-anchor="middle" font-size="9" font-weight="bold" fill="#ff6f00">HTTPS GET Scan_Inv.zip</text>
+  <text x="670" y="352" text-anchor="middle" font-size="8" fill="#666">IcedID Loader Download</text>
+
+  <!-- 3. PowerShell Check-in -->
+  <path d="M 280 480 L 750 480" stroke="#d32f2f" stroke-width="2.5" fill="none" marker-end="url(#arrow-red)"/>
+  <rect x="420" y="465" width="150" height="35" rx="5" fill="#fff" stroke="#d32f2f" stroke-width="1" opacity="0.95"/>
+  <text x="495" y="480" text-anchor="middle" font-size="9" font-weight="bold" fill="#d32f2f">PowerShell UA</text>
+  <text x="495" y="492" text-anchor="middle" font-size="8" fill="#666">status=start/install</text>
+
+  <!-- 4. Payload Download -->
+  <path d="M 280 510 L 1080 510" stroke="#d32f2f" stroke-width="2.5" fill="none" marker-end="url(#arrow-red)"/>
+  <rect x="580" y="495" width="200" height="35" rx="5" fill="#fff" stroke="#d32f2f" stroke-width="1" opacity="0.95"/>
+  <text x="680" y="510" text-anchor="middle" font-size="9" font-weight="bold" fill="#d32f2f">GET /data/czx.jpg</text>
+  <text x="680" y="522" text-anchor="middle" font-size="8" fill="#666">IcedID Binary (48KB+)</text>
+
+  <!-- 5. IcedID C2 Beaconing -->
+  <path d="M 280 640 L 880 640" stroke="#d32f2f" stroke-width="2.5" fill="none" marker-end="url(#arrow-red)"/>
+  <rect x="480" y="625" width="180" height="35" rx="5" fill="#fff" stroke="#d32f2f" stroke-width="1" opacity="0.95"/>
+  <text x="570" y="640" text-anchor="middle" font-size="9" font-weight="bold" fill="#d32f2f">Custom TCP/12432</text>
+  <text x="570" y="652" text-anchor="middle" font-size="8" fill="#666">~592KB Transfer</text>
+
+  <!-- 6. AD Reconnaissance - LDAP -->
+  <path d="M 280 400 L 370 400" stroke="#7b1fa2" stroke-width="2.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-purple)"/>
+  <rect x="300" y="385" width="120" height="30" rx="5" fill="#fff" stroke="#7b1fa2" stroke-width="1" opacity="0.95"/>
+  <text x="360" y="405" text-anchor="middle" font-size="8" font-weight="bold" fill="#7b1fa2">LDAP Enumeration</text>
+
+  <!-- 7. AD Reconnaissance - Kerberos -->
+  <path d="M 280 375 L 370 375" stroke="#7b1fa2" stroke-width="2.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-purple)"/>
+  <text x="330" y="370" text-anchor="middle" font-size="8" fill="#7b1fa2">Kerberos TGT</text>
+
+  <!-- 8. DRSUAPI Discovery (DCSync Prep) -->
+  <path d="M 280 425 L 370 425" stroke="#7b1fa2" stroke-width="3" fill="none" stroke-dasharray="8,4" marker-end="url(#arrow-purple)"/>
+  <rect x="290" y="430" width="130" height="30" rx="5" fill="#fff" stroke="#7b1fa2" stroke-width="1.5" opacity="0.95"/>
+  <text x="355" y="450" text-anchor="middle" font-size="8" font-weight="bold" fill="#7b1fa2">DRSUAPI Bind</text>
+
+  <!-- 9. NBNS Broadcast -->
+  <path d="M 170 390 L 170 450" stroke="#ff6f00" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+  <text x="155" y="440" text-anchor="end" font-size="8" fill="#ff6f00">NBNS Broadcast</text>
+
+  <!-- ==================== DATA AT RISK ==================== -->
+  <rect x="60" y="780" width="550" height="60" rx="8" fill="#fff" stroke="#d32f2f" stroke-width="2" filter="url(#shadow)"/>
+  <text x="335" y="800" text-anchor="middle" font-size="11" font-weight="bold" fill="#d32f2f">DATA AT RISK / CONFIRMED THEFT</text>
+  <text x="335" y="820" text-anchor="middle" font-size="10" fill="#333">Domain User Credentials • Kerberos Tickets • AD Structure • Potential DCSync Hashes</text>
+
+  <!-- ==================== MITRE ATT&CK ==================== -->
+  <rect x="720" y="740" width="620" height="100" rx="8" fill="#fff" stroke="#1976d2" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1030" y="760" text-anchor="middle" font-size="11" font-weight="bold" fill="#1976d2">MITRE ATT&amp;CK Techniques Observed</text>
+  <text x="1030" y="780" text-anchor="middle" font-size="9" fill="#333">T1566 (Phishing) | T1071.001 (Web Protocols) | T1041 (Exfiltration)</text>
+  <text x="1030" y="798" text-anchor="middle" font-size="9" fill="#333">T1087 (Account Discovery) | T1558 (Kerberos) | T1003.006 (DCSync)</text>
+  <text x="1030" y="816" text-anchor="middle" font-size="9" fill="#333">T1204 (User Execution) | T1059.001 (PowerShell) | T1021.002 (SMB)</text>
+</svg>
