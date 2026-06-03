@@ -1,0 +1,44 @@
+
+```csv
+ioc_type,value,protocol,source,destination,malware_stage,confidence,description,wireshark_filter
+IP,10.7.10.47,Multiple,10.7.10.47,Multiple,Victim_HOST,HIGH,Infected workstation - DESKTOP-9PEA63H,ip.addr == 10.7.10.47
+IP,10.7.10.9,Multiple,10.7.10.47,10.7.10.9,Infrastructure,HIGH,Domain Controller - WIN-S3WT6LGQFVX.coolweathercoat.com,ip.addr == 10.7.10.9
+IP,80.77.24.175,HTTP,10.7.10.47,80.77.24.175,Initial_Delivery,HIGH,Initial redirector - serves /main.php that redirects to Firebase,ip.dst == 80.77.24.175
+IP,192.153.57.223,HTTP,10.7.10.47,192.153.57.223,IcedID_Loader,HIGH,IcedID loader C2 - skigimeetroc.com (gzip payload returned),ip.dst == 192.153.57.223
+IP,104.168.53.18,HTTPS,10.7.10.47,104.168.53.18,C2_HTTPS,HIGH,IcedID HTTPS C2 - askamoshopsi.com (self-signed cert),ip.dst == 104.168.53.18
+IP,217.199.121.56,HTTPS,10.7.10.47,217.199.121.56,C2_HTTPS,HIGH,IcedID HTTPS C2 - skansnekssky.com (self-signed cert),ip.dst == 217.199.121.56
+IP,194.26.135.119,TCP,10.7.10.47,194.26.135.119,C2_Custom,HIGH,IcedID custom C2 protocol on port 12432 (~592KB transfer),tcp.port == 12432
+IP,193.149.176.100,TCP,10.7.10.47,193.149.176.100,BackConnect,HIGH,IcedID BackConnect traffic over port 443 (AD enumeration seen),ip.dst == 193.149.176.100
+Domain,firebasestorage.googleapis.com,HTTPS,10.7.10.47,firebasestorage.googleapis.com,Payload_Hosting,HIGH,Legitimate Google Firebase hosting malicious Scan_Inv.zip,dns.qry.name contains "firebasestorage.googleapis.com"
+Domain,skigimeetroc.com,HTTP,10.7.10.47,skigimeetroc.com,C2_Loader,HIGH,IcedID loader C2 domain - resolves to 192.153.57.223,dns.qry.name contains "skigimeetroc.com"
+Domain,askamoshopsi.com,HTTPS,10.7.10.47,askamoshopsi.com,C2_HTTPS,HIGH,IcedID HTTPS C2 domain - self-signed certificate,dns.qry.name contains "askamoshopsi.com"
+Domain,skansnekssky.com,HTTPS,10.7.10.47,skansnekssky.com,C2_HTTPS,HIGH,IcedID HTTPS C2 domain - self-signed certificate,dns.qry.name contains "skansnekssky.com"
+Domain,623start.site,HTTP,10.7.10.47,623start.site,PowerShell_Checkin,HIGH,PowerShell check-in domain - status=start/install parameters,dns.qry.name contains "623start.site"
+Domain,guiatelefonos.com,HTTP,10.7.10.47,guiatelefonos.com,Payload_Hosting,HIGH,Serves /data/czx.jpg (IcedID payload disguised as image),dns.qry.name contains "guiatelefonos.com"
+Domain,coolweathercoat.com,Kerberos,10.7.10.47,coolweathercoat.com,Infrastructure,HIGH,Active Directory domain name (Kerberos realm observed),kerberos
+Domain,COOLWEATHERCOAT.COM,DNS/LDAP,10.7.10.47,COOLWEATHERCOAT.COM,Infrastructure,HIGH,AD domain from LDAP Netlogon response and Kerberos,frame contains "COOLWEATHERCOAT.COM"
+URL,http://80.77.24.175/main.php,HTTP,10.7.10.47,80.77.24.175,Initial_Delivery,HIGH,Initial redirector URL - serves redirect to Firebase,http.request.uri contains "/main.php"
+URL,https://firebasestorage.googleapis.com/v0/b/...,HTTPS,10.7.10.47,firebasestorage.googleapis.com,Payload_Download,HIGH,Firebase URL hosting Scan_Inv.zip (IcedID installer),http.request.uri contains "firebasestorage"
+URL,http://623start.site/?status=start&av=Windows%20Defender,HTTP,10.7.10.47,623start.site,PowerShell_Checkin,HIGH,PowerShell check-in with AV status reporting,http.request.uri contains "status=start"
+URL,http://623start.site/?status=install,HTTP,10.7.10.47,623start.site,PowerShell_Checkin,HIGH,PowerShell check-in after installation,http.request.uri contains "status=install"
+URL,http://guiatelefonos.com/data/czx.jpg,HTTP,10.7.10.47,guiatelefonos.com,Payload_Download,HIGH,IcedID payload disguised as JPEG image,http.request.uri contains "czx.jpg"
+URI,/main.php,HTTP,10.7.10.47,80.77.24.175,Initial_Delivery,HIGH,Initial redirector endpoint,http.request.uri == "/main.php"
+URI,/data/czx.jpg,HTTP,10.7.10.47,guiatelefonos.com,Payload_Download,HIGH,Disguised IcedID binary path,http.request.uri == "/data/czx.jpg"
+URI,/?status=start,HTTP,10.7.10.47,623start.site,PowerShell_Checkin,HIGH,PowerShell check-in endpoint with AV parameter,http.request.uri contains "status=start"
+URI,/?status=install,HTTP,10.7.10.47,623start.site,PowerShell_Checkin,HIGH,PowerShell installation confirmation,http.request.uri contains "status=install"
+User-Agent,Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0),HTTP/HTTPS,10.7.10.47,Multiple,C2_Communication,HIGH,ICEID-specific User-Agent (IE11 on Windows 7),http.user_agent contains "Trident/7.0"
+User-Agent,PowerShell,HTTP,10.7.10.47,Multiple,PowerShell_Activity,HIGH,PowerShell-based HTTP client - abnormal for file downloads,http.user_agent contains "PowerShell"
+Hostname,DESKTOP-9PEA63H,NBNS,10.7.10.47,10.7.10.255,Discovery,Medium,NBNS workstation registration broadcast,nbns
+Hostname,WIN-S3WT6LGQFVX,LDAP/Kerberos,10.7.10.9,10.7.10.47,Infrastructure,High,Domain Controller hostname from LDAP response,frame contains "WIN-S3WT6LGQFVX"
+Protocol,LDAP SASL Bind,LDAP,10.7.10.47,10.7.10.9,Reconnaissance,HIGH,Authenticated LDAP bind using GSS-SPNEGO/Kerberos,ldap contains "GSS-SPNEGO"
+Protocol,SMB2 Session Setup,SMB2,10.7.10.47,10.7.10.9,Lateral_Movement_Prep,MEDIUM,SMB authentication negotiation with DC,smb2.cmd == 1
+Protocol,DRSUAPI Interface Bind,DCE/RPC,10.7.10.47,10.7.10.9,Credential_Access,HIGH,Directory Replication Service interface discovery (DCSync prep),dcerpc && frame contains "DRSUAPI"
+Protocol,Netlogon Discovery,LDAP,10.7.10.47,10.7.10.9,Discovery,HIGH,LDAP Netlogon response exposing DC capabilities,ldap contains "Netlogon"
+Kerberos,PREAUTH_REQUIRED,Kerberos,10.7.10.9,10.7.10.47,Authentication,MEDIUM,Kerberos pre-authentication challenge (error code 25),kerberos.error_code == 25
+Kerberos,krbtgt,Kerberos,10.7.10.9,10.7.10.47,Authentication,MEDIUM,Kerberos Ticket Granting Ticket service referenced,kerberos contains "krbtgt"
+DNS_Query,_ldap._tcp.dc._msdcs.coolweathercoat.com,DNS,10.7.10.47,10.7.10.9,Discovery,HIGH,LDAP service discovery DNS query for AD,dns.qry.name contains "_ldap._tcp.dc._msdcs"
+Filename,Scan_Inv.zip,SMB/HTTP,Multiple,10.7.10.47,Initial_Delivery,HIGH,Initial IcedID installer ZIP filename,frame contains "Scan_Inv.zip"
+Filename,Invoice_07-19-2023.zip,SMB,192.168.1.101,10.7.10.47,Initial_Delivery,HIGH,Alternative initial attachment filename (malspam),frame contains "Invoice_07-19-2023.zip"
+File_Hash,MD5:SHA1:SHA256,Multiple,10.7.10.47,Multiple,Payload,Medium,Extract from PCAP using NetworkMiner (compute during analysis),frame contains
+JA3,a0e9f5d64349fb13191bc781f81f42e1,TLS,10.7.10.47,Multiple,C2_Encryption,Medium,IcedID JA3 fingerprint (client TLS),tls.handshake.ja3 == "a0e9f5d64349fb13191bc781f81f42e1"
+JA3S,452e969c51882628dac65e38aff0f8e5ebee6e6b,TLS,Multiple,10.7.10.47,C2_Encryption,Medium,IcedID self-signed certificate fingerprint,tls.handshake.certificate matches "452e969c51882628dac65e38aff0f8e5ebee6e6b"
