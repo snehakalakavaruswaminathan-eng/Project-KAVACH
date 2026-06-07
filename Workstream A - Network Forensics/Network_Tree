@@ -1,0 +1,14 @@
+``` 
+
+project-kavach/
+└── network/
+    ├── triage-notes.md      
+    ├── hypotheses.md        
+    ├── iocs.csv             
+    ├── report.md            
+    └── architecture/
+        ├── before.mmd       
+        └── after.mmd      
+
+
+```
