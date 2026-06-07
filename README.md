@@ -1,11 +1,13 @@
 # Project-KAVACH
 A two-surface security assessment for a fictional non-banking financial enterprise. Network forensics meets web application security, with synthesis as the deliverable.
 
-
-##
+```
 project-kavach/
 ├── README.md
-|__ Sprint-Docs
+├── Sprint-Docs/
+│   ├── backlog/
+│   ├── meeting-notes/
+│   └── retrospective/
 ├── Workstream A - Network Forensics/
 │   ├── triage-notes.md
 │   ├── hypotheses.md
@@ -17,10 +19,11 @@ project-kavach/
 │   ├── findings/ (one folder per vulnerability)
 │   ├── sast/ (before.json, after.json)
 │   └── report.md
-├── Workstream C - Synthesis/
-│   ├── threat-model.md
-│   ├── defense-in-depth.md
-│   └── exec-readout.pdf
-├── prompts/ (your LLM interaction logs)
+└── Workstream C - Synthesis/
+    ├── threat-model.md
+    ├── defense-in-depth.md
+    └── exec-readout.pdf
+```
+
 
 
