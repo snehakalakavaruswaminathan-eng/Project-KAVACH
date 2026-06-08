@@ -27,25 +27,25 @@ Sneha – Estimated 3 hours [Week 2]
     - Lukesh Singh - 2 hours - Completed: [22 May 2026]
 - [x] Connected with the team for any feedback on the pcap files chosen and any issues realted to wireshark, discussed our next steps for the Project.
     - Lukesh Singh - Completed [23 May 2026]
-- [x] Researched the Project Kavach Workstream B requirements and established a web application security assessment methodology using OWASP Juice Shop and DVWA as target applications.
+- [x] Conducted forensic analysis of LDAP, Kerberos, SMB2, NBNS, and DCE/RPC traffic from the IcedID malware PCAP dataset to identify authentication workflows, Active   Directory discovery activities, and attacker reconnaissance patterns.
     - Sneha – 5 hours – Completed: [24 May 2026]
-- [x] Installed and configured Docker-based lab environments for OWASP Juice Shop and DVWA in Kali Linux to support vulnerability assessment activities.
-    - Sneha – 3 hours – Completed: [25 May 2026]
-- [x] Performed OWASP ZAP vulnerability scanning against OWASP Juice Shop and documented identified issues including CSP Header Missing, Missing Anti-Clickjacking Header, Missing HSTS Header, X-Content-Type-Options Missing, and Information Disclosure findings.
-    - Sneha – 4 hours – Completed: [26 May 2026]
-- [x] Conducted vulnerability analysis of OWASP Juice Shop findings and mapped observations to OWASP Top 10 categories, CWE references, security impacts, and remediation recommendations.
-    - Sneha – 4 hours – Completed: [26 May 2026]
-- [x] Performed OWASP ZAP assessment against DVWA and analyzed vulnerabilities including SQL Injection, Reflected XSS, Stored XSS, Command Injection, CSRF, File Inclusion, and Security Misconfiguration weaknesses.
-    - Sneha – 5 hours – Completed: [27 May 2026]
-- [x] Created detailed vulnerability reports containing attack descriptions, affected endpoints, request/response evidence, vulnerable headers, payload examples, root cause analysis, severity ratings, and remediation guidance.
-    - Sneha – 4 hours – Completed: [27 May 2026]
-- [x] Conducted forensic analysis of LDAP, Kerberos, SMB2, NBNS, and DCE/RPC traffic from the IcedID malware PCAP dataset to identify authentication workflows, Active Directory discovery activities, and attacker reconnaissance patterns.
-    - Sneha – 6 hours – Completed: [28 May 2026]
 - [x] Developed IOC tables and evidence matrices containing IP addresses, domains, URLs, hostnames, protocols, and Wireshark filters used during malware investigation activities.
-    - Sneha – 3 hours – Completed: [28 May 2026]
+    - Sneha – 3 hours – Completed: [26 May 2026]
 - [x] Created GitHub-compatible Markdown, Mermaid architecture diagrams, CSV IOC datasets, and technical documentation templates for Project Kavach deliverables.
-Sneha – 3 hours – Completed: [29 May 2026]
-- [x] Evaluated the use of Semgrep for Static Application Security Testing (SAST) and researched secure code review approaches for OWASP Juice Shop and DVWA source code analysis.
-    - Sneha – 2 hours – Completed: [29 May 2026]
-- [x] Collaborated with team members to review PCAP analysis findings, validate vulnerability assessment outputs, refine reporting formats, and align deliverables across Workstreams A, B, and C.
-- Sneha – 2 hours – Completed: [30 May 2026]
+    - Sneha – 3 hours – Completed: [27 May 2026]
+- [x] Researched the Project Kavach Workstream B requirements and established a web application security assessment methodology using OWASP Juice Shop and DVWA as target applications.
+    - Sneha – 4 hours – Completed: [29 May 2026]
+- [x] Installed and configured Docker-based lab environments for OWASP Juice Shop and DVWA in Kali Linux to support vulnerability assessment activities.
+    - Sneha – 3 hours – Completed: [30 May 2026]
+- [x] Collaborated with team members to review PCAP analysis findings, validate vulnerability assessment outputs, refine reporting formats.
+    - Sneha – 2 hours – Completed: [30 May 2026]
+- [x] Performed OWASP ZAP vulnerability scanning against OWASP Juice Shop and documented identified issues including CSP Header Missing, Missing Anti-Clickjacking Header, Missing HSTS Header, X-Content-Type-Options Missing, and Information Disclosure. Performed OWASP ZAP vulnerability scanning against DVWA web application and analyzed vulnerabilities including SQL Injection, Reflected XSS, Stored XSS, Command Injection, CSRF, File Inclusion, and Security Misconfiguration weaknesses.
+    - Sneha – 4 hours – Completed: [3 June 2026]
+- [x] Conducted vulnerability analysis of OWASP Juice Shop findings and mapped observations to OWASP Top 10 categories, CWE references, security impacts, and remediation recommendations.
+    - Sneha – 2 hours – Completed: [4 June 2026]
+- [x] Compiled DVWA vulnerability findings and mapped observations to OWASP Top 10 categories and documented the security impacts and remediation recommendations.
+    - Sneha – 2 hours – Completed: [6 June 2026]
+- [x] Updated Github repository with final documents and sprint documents
+    - Sneha – 1 hours – Completed: [8 June 2026]
+
+
