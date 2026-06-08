@@ -13,12 +13,11 @@ Privilege escalation activity
 Lateral movement indicators
 
 For each filter provide:
-
-Purpose
-Expected packet contents
-Suspicious values to look for
-Example analyst observations
-Relevance to malware investigations such as ICEID
+- Purpose
+- Expected packet contents
+- Suspicious values to look for
+- Example analyst observations
+- Relevance to malware investigations such as ICEID
 
 # 2. Web app assessment. 
 You are a Senior Web Application Penetration Tester, Application Security Engineer, Threat Researcher, and Security Assessment Mentor. 
