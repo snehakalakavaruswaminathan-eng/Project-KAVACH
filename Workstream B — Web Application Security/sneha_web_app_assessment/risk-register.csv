@@ -1,0 +1,9 @@
+ID,Vulnerability,Severity,OWASP Category,Business Impact,Priority
+KAV-001,SQL Injection,High,A03,Database compromise,Critical
+KAV-002,CSP Missing,Medium,A05,XSS amplification,High
+KAV-003,CORS Misconfiguration,Medium,A05,Unauthorized cross-origin access,High
+KAV-004,Clickjacking Protection Missing,Medium,A05,User action hijacking,Medium
+KAV-005,Session ID in URL,Medium,A07,Session hijacking,Medium
+KAV-006,Private IP Disclosure,Low,A05,Reconnaissance,Low
+KAV-007,Timestamp Disclosure,Low,A05,Fingerprinting,Low
+KAV-008,X-Content-Type-Options Missing,Low,A05,MIME sniffing attacks,Low
