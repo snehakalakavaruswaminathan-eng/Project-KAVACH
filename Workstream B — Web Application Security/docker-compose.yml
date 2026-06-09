@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: kavach-dvwa
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_PASS=p@ssw0rd
+    restart: unless-stopped
+    networks:
+      - kavach-net
+
+  juiceshop:
+    image: bkimminich/juice-shop
+    container_name: kavach-juiceshop
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - kavach-net
+
+networks:
+  kavach-net:
+    driver: bridge
