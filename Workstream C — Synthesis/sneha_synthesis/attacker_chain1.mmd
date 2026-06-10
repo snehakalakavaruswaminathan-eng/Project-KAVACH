@@ -1,0 +1,19 @@
+graph TD
+    %% Surface Styles
+    classDef web fill:#1f77b4,stroke:#114b75,stroke-width:2px,color:#fff;
+    classDef network fill:#ff7f0e,stroke:#b85a06,stroke-width:2px,color:#fff;
+    
+    subgraph Web_Application_Surface [Surface 1: Web Application Compromise]
+        A[SQL Injection]:::web -->|Database Query Manipulation| B[Credential Theft]:::web
+    end
+
+    subgraph Internal_Network_Surface [Surface 2: Internal Active Directory Pivot]
+        B -->|Compromised Domain Credentials| C[LDAP Login]:::network
+        C -->|Authentication Exchange| D[Kerberos Ticket Request]:::network
+        D -->|Privileged Domain Session| E[SMB Access to DC]:::network
+        E -->|Directory Replication Service API Abuse| F[DCSync Domain Dominance]:::network
+    end
+
+    %% Flow Details
+    style Web_Application_Surface fill:#f4f6f8,stroke:#cbd5e1,stroke-width:1px;
+    style Internal_Network_Surface fill:#fff7ed,stroke:#fed7aa,stroke-width:1px;
