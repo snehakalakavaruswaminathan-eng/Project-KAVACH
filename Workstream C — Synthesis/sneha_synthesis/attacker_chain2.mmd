@@ -1,0 +1,18 @@
+graph TD
+    %% Surface Styles
+    classDef web fill:#1f77b4,stroke:#114b75,stroke-width:2px,color:#fff;
+    classDef network fill:#ff7f0e,stroke:#b85a06,stroke-width:2px,color:#fff;
+
+    subgraph Client_Side_Web_Surface [Surface 1: Client-Side Web Flaws]
+        G[Missing Content Security Policy - CSP]:::web -->|Allows Untrusted Code Execution| H[JavaScript Injection]:::web
+        H -->|Drive-by Download / Script Redirection| I[Malware Delivery to Endpoint]:::web
+    end
+
+    subgraph Internal_Network_Surface [Surface 2: Endpoint Control & AD Pivot]
+        I -->|Host Compromise & Execution| J[Active Directory Enumeration]:::network
+        J -->|Local Extraction / LSASS Dumping| K[Credential Theft & Privilege Escalation]:::network
+    end
+
+    %% Flow Details
+    style Client_Side_Web_Surface fill:#f4f6f8,stroke:#cbd5e1,stroke-width:1px;
+    style Internal_Network_Surface fill:#fff7ed,stroke:#fed7aa,stroke-width:1px;
