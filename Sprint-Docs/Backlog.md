@@ -47,5 +47,7 @@ Sneha – Estimated 3 hours [Week 2]
     - Sneha – 2 hours – Completed: [6 June 2026]
 - [x] Updated Github repository with final documents and sprint documents
     - Sneha – 1 hours – Completed: [8 June 2026]
+- [x] Read about threat modelling and prepared the STRIDE model matrix for Meridian use case with the results of the workstream A and B. 
+    - Sneha - 5 hours - Completed [10 June 2026]
 
 
