@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE cairis_model PUBLIC "-//CAIRIS//DTD MODEL 1.0//EN" "https://cairis.org/dtd/cairis_model.dtd">
+<cairis_model>
+
+<tvtypes>
+</tvtypes>
+
+<domainvalues>
+  <threat_value name="None"><description>No threat impact</description></threat_value>
+  <threat_value name="Low"><description>Low threat impact</description></threat_value>
+  <threat_value name="Medium"><description>Medium threat impact</description></threat_value>
+  <threat_value name="High"><description>High threat impact</description></threat_value>
+
+  <risk_value name="Negligible"><description>Negligible risk</description></risk_value>
+  <risk_value name="Tolerable"><description>Tolerable risk</description></risk_value>
+  <risk_value name="Undesirable"><description>Undesirable risk</description></risk_value>
+  <risk_value name="Intolerable"><description>Intolerable risk</description></risk_value>
+
+  <countermeasure_value name="None"><description>No countermeasure value</description></countermeasure_value>
+  <countermeasure_value name="Low"><description>Low countermeasure value</description></countermeasure_value>
+  <countermeasure_value name="Medium"><description>Medium countermeasure value</description></countermeasure_value>
+  <countermeasure_value name="High"><description>High countermeasure value</description></countermeasure_value>
+
+  <severity_value name="Negligible"><description>Negligible severity</description></severity_value>
+  <severity_value name="Marginal"><description>Marginal severity</description></severity_value>
+  <severity_value name="Critical"><description>Critical severity</description></severity_value>
+  <severity_value name="Catastrophic"><description>Catastrophic severity</description></severity_value>
+
+  <likelihood_value name="Incredible"><description>Incredible likelihood</description></likelihood_value>
+  <likelihood_value name="Improbable"><description>Improbable likelihood</description></likelihood_value>
+  <likelihood_value name="Remote"><description>Remote likelihood</description></likelihood_value>
+  <likelihood_value name="Occasional"><description>Occasional likelihood</description></likelihood_value>
+  <likelihood_value name="Probable"><description>Probable likelihood</description></likelihood_value>
+  <likelihood_value name="Frequent"><description>Frequent likelihood</description></likelihood_value>
+</domainvalues>
+
+<cairis>
+
+  <project_settings name="Delta">
+    <background>Delta is a mid-sized organization with IT, HR, and Finance departments operating under a unified Single Sign-On identity model using Microsoft Entra ID. All department services are accessed through a central API Gateway that validates SSO tokens issued after MFA-enforced authentication.</background>
+    <strategic_goals>Provide secure, unified access to all departmental services through a single SSO model. Enforce least-privilege access, MFA, and full audit logging across IT, HR, and Finance functions.</strategic_goals>
+    <scope>SSO authentication model, API Gateway token validation, department-level service access controls, threat modeling for identity, data, and infrastructure assets in the DeltaProduction environment.</scope>
+    <naming_conventions>
+      <entry name="SSO"><definition>Single Sign-On: a centralized authentication mechanism allowing users to log in once and access multiple services.</definition></entry>
+      <entry name="IdP"><definition>Identity Provider: the system (Microsoft Entra ID) responsible for authenticating users and issuing signed tokens.</definition></entry>
+      <entry name="MFA"><definition>Multi-Factor Authentication: requiring a second form of verification beyond password, such as an authenticator app or hardware token.</definition></entry>
+      <entry name="RBAC"><definition>Role-Based Access Control: restricting system access based on roles assigned to users within the SSO directory.</definition></entry>
+      <entry name="SIEM"><definition>Security Information and Event Management: a platform for collecting, correlating, and alerting on security events from across the organization.</definition></entry>
+    </naming_conventions>
+    <contributors>
+      <contributor first_name="Delta" surname="Security Team" affiliation="Delta Organization" role="Participant"/>
+    </contributors>
+  </project_settings>
+
+  <!-- ==================== ENVIRONMENT ========================= -->
+  <environment name="DeltaProduction" short_code="DPROD">
+    <definition>Live SSO-connected multi-department network for Delta organization. Internet-connected, hybrid cloud model using Microsoft Entra ID as the central Identity Provider. Encompasses IT, HR, and Finance departments connected via API Gateway and SSO.</definition>
+    <asset_values>
+      <none>No discernible business value</none>
+      <low>Minimal impact if compromised</low>
+      <medium>Moderate operational impact if compromised</medium>
+      <high>Significant financial, reputational, or regulatory impact if compromised</high>
+    </asset_values>
+  </environment>
+
+</cairis>
+
+<riskanalysis>
+
+  <!-- ==================== ROLES =============================== -->
+  <role name="IT_Admin" type="Stakeholder" short_code="ITADM">
+    <description>IT administrator with elevated privileges over infrastructure, Identity Provider configuration, firewall rules, and network management. Subject to hardware MFA and privileged access workstation requirements.</description>
+  </role>
+
+  <role name="IT_User" type="Stakeholder" short_code="ITUSR">
+    <description>Standard IT department employee with access to internet services, email, VPN, storage, employee websites, and team-specific sites. Authenticated via SSO with standard MFA.</description>
+  </role>
+
+  <role name="HR_Admin" type="Stakeholder" short_code="HRADM">
+    <description>HR administrator with full access to employee records, onboarding workflows, leave management, and travel management systems. Access to full PII records requires ABAC layer on top of RBAC.</description>
+  </role>
+
+  <role name="HR_User" type="Stakeholder" short_code="HRUSR">
+    <description>HR department employee with self-service access to leave requests, travel forms, and limited employee records. Cannot access salary or tax data.</description>
+  </role>
+
+  <role name="Fin_Admin" type="Stakeholder" short_code="FINADM">
+    <description>Finance administrator with access to salary processing, tax management, and financial reporting. Subject to 30-minute session limits and step-up MFA for transactions above defined thresholds.</description>
+  </role>
+
+  <role name="Fin_User" type="Stakeholder" short_code="FINUSR">
+    <description>Finance department employee with read access to financial reports and limited transaction initiation. Cannot approve salary disbursements.</description>
+  </role>
+
+  <role name="SOC_Analyst" type="Stakeholder" short_code="SOCA">
+    <description>Security Operations Center analyst responsible for monitoring the SIEM, responding to alerts, and escalating confirmed incidents within defined SLAs.</description>
+  </role>
+
+  <!-- ==================== ASSETS ============================== -->
+  <asset name="EntraID_IdentityStore" short_code="EIDIS" type="Systems" is_critical="1">
+    <description>Microsoft Entra ID directory containing all Delta user identities, group memberships, role assignments, and MFA configurations. Compromise allows full impersonation of any Delta user and complete SSO bypass.</description>
+    <significance>Complete SSO bypass possible if compromised. All department access is lost if unavailable.</significance>
+    <critical_rationale>All authentication and authorization decisions depend on this asset.</critical_rationale>
+    <security_property environment="DeltaProduction" property="confidentiality" value="High">
+      <rationale>Contains MFA secrets and role mappings for all users.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="integrity" value="High">
+      <rationale>Tampering with role assignments breaks least-privilege controls across all departments.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="availability" value="High">
+      <rationale>IdP unavailability blocks access to all SSO-dependent department services.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="SSO_Token" short_code="STOK" type="Information" is_critical="1">
+    <description>JWT or SAML assertion issued by Entra ID after successful authentication. Carries user identity, roles, and expiry claims. Validated by the API Gateway and all department services. Short-lived: 60 minutes standard, 30 minutes for Finance.</description>
+    <significance>A stolen or forged token enables impersonation of any user without requiring their credentials.</significance>
+    <critical_rationale>Token is the sole proof of identity presented to all department services after initial login.</critical_rationale>
+    <security_property environment="DeltaProduction" property="confidentiality" value="High">
+      <rationale>Token grants service access; exposure allows full impersonation within token lifetime.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="integrity" value="High">
+      <rationale>A tampered token with modified role claims could escalate privileges if signature validation is bypassed.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="accountability" value="High">
+      <rationale>Token must be verifiably issued by the trusted IdP and attributable to a specific authenticated user.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="Employee_PII" short_code="EPII" type="Information" is_critical="0">
+    <description>Personally identifiable information held in HR systems including names, addresses, national IDs, employment contracts, performance records, and medical information. AES-256 encrypted at rest with HR-specific keys in Key Vault.</description>
+    <significance>Exposure triggers GDPR enforcement action, regulatory fines, and reputational harm to Delta.</significance>
+    <critical_rationale>Subject to GDPR and organizational data protection policies.</critical_rationale>
+    <security_property environment="DeltaProduction" property="confidentiality" value="High">
+      <rationale>PII is legally protected; unauthorized disclosure constitutes a data breach requiring notification.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="integrity" value="Medium">
+      <rationale>Tampered employee records could affect payroll, leave balances, or contract terms.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="availability" value="Medium">
+      <rationale>Temporary unavailability is operationally disruptive but not immediately safety-critical.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="Salary_Tax_Data" short_code="STAXD" type="Information" is_critical="1">
+    <description>Payroll data, salary bands, tax filings, and financial disbursement records held in Finance systems. Segregated into a dedicated encrypted database partition. All disbursement approvals are digitally signed for non-repudiation.</description>
+    <significance>Exposure leads to financial fraud, regulatory penalties, and breach of employee confidentiality obligations.</significance>
+    <critical_rationale>Salary data is legally protected; disbursement integrity directly affects financial operations.</critical_rationale>
+    <security_property environment="DeltaProduction" property="confidentiality" value="High">
+      <rationale>Salary data is commercially sensitive and subject to employment law protections.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="integrity" value="High">
+      <rationale>Tampered payroll data could trigger fraudulent disbursements causing direct financial loss.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="accountability" value="High">
+      <rationale>All salary disbursements must be attributable to a specific authorized approver via digital signature.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="Audit_Logs" short_code="ALOGS" type="Information" is_critical="0">
+    <description>Immutable SIEM records of all authentication events, role changes, data access, and privilege escalations across all Delta departments. Stored in write-once append-only storage with real-time copies to an independent SIEM.</description>
+    <significance>Tampering removes the ability to detect, investigate, and attribute security incidents.</significance>
+    <critical_rationale>Logs are the primary forensic evidence source for incident response and compliance audits.</critical_rationale>
+    <security_property environment="DeltaProduction" property="integrity" value="High">
+      <rationale>Logs must be tamper-evident; any modification undermines their forensic and compliance value.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="availability" value="Medium">
+      <rationale>Unavailable logs impair real-time incident detection and regulatory compliance reporting.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="accountability" value="High">
+      <rationale>Logs must reliably attribute every action to a specific authenticated identity and timestamp.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="API_Gateway" short_code="APIGW" type="Software" is_critical="1">
+    <description>Central API Gateway responsible for validating SSO tokens, enforcing rate limits, and routing authenticated requests to IT, HR, and Finance department services. All inter-department service access passes through this component.</description>
+    <significance>A compromised or bypassed gateway eliminates the central enforcement point for access control across all departments.</significance>
+    <critical_rationale>The gateway is the single enforcement point for SSO token validation; bypass grants unrestricted service access.</critical_rationale>
+    <security_property environment="DeltaProduction" property="integrity" value="High">
+      <rationale>Bypassing or tampering with the gateway removes all SSO token enforcement for downstream services.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="availability" value="High">
+      <rationale>Gateway unavailability prevents access to all department services simultaneously.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="VPN_Credentials" short_code="VPNC" type="Information" is_critical="0">
+    <description>Certificates and credentials used to authenticate remote users to Delta VPN services. SSO-integrated for standard users; certificate-based for privileged users. Split tunnelling for sensitive traffic is prohibited.</description>
+    <significance>Compromised VPN credentials allow remote access to internal network segments, bypassing perimeter controls.</significance>
+    <critical_rationale>VPN is the remote access gateway to the internal network; compromise expands the attack surface significantly.</critical_rationale>
+    <security_property environment="DeltaProduction" property="confidentiality" value="High">
+      <rationale>VPN credentials allow remote network entry; exposure bypasses perimeter security controls.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="integrity" value="Medium">
+      <rationale>Tampered VPN configurations could introduce unauthorized tunnels into the internal network.</rationale>
+    </security_property>
+  </asset>
+
+  <asset name="Email_Archives" short_code="EARCH" type="Information" is_critical="0">
+    <description>Email messages and attachments stored in Microsoft Exchange Online mailboxes across all departments. Protected by DKIM, SPF, DMARC, and Microsoft Defender for Office 365. Basic Authentication is disabled; only Modern Authentication is permitted.</description>
+    <significance>Unauthorized access exposes confidential communications, attachments, and potentially sensitive HR and Finance information shared via email.</significance>
+    <critical_rationale>Email archives may contain sensitive business communications and attachments not classified elsewhere.</critical_rationale>
+    <security_property environment="DeltaProduction" property="confidentiality" value="Medium">
+      <rationale>Email content sensitivity varies; archives of privileged users carry higher risk.</rationale>
+    </security_property>
+    <security_property environment="DeltaProduction" property="integrity" value="Medium">
+      <rationale>Tampered email records could be used for fraud or evidence manipulation in disputes.</rationale>
+    </security_property>
+  </asset>
+
+  <!-- ==================== PERSONAS (ATTACKERS) ================ -->
+
+</riskanalysis>
+
+<usability>
+
+  <persona name="ExternalAdversary" type="Primary" assumption_persona="FALSE" image="">
+    <activities>Conducts phishing campaigns targeting Delta employees via lookalike SSO login pages. Attempts credential stuffing against the Entra ID login endpoint. Probes internet-facing VPN and API endpoints for vulnerabilities. Sends spear-phishing emails to trigger MFA push approvals.</activities>
+    <attitudes>Motivated by financial gain or corporate espionage. Patient and technically capable. Operates entirely from outside the Delta network perimeter with no legitimate access to any Delta system.</attitudes>
+    <aptitudes>Proficient in phishing infrastructure setup, XSS exploitation, credential stuffing automation, API enumeration, and social engineering of help desk staff.</aptitudes>
+    <motivations>Financial gain through data theft or ransomware. Corporate espionage on behalf of a competitor. Disruption of Delta operations as a service to a third party.</motivations>
+    <skills>Phishing kit deployment, MFA fatigue attacks, XSS payload injection, OSINT gathering on Delta employees via LinkedIn and public data sources, credential stuffing using leaked password databases.</skills>
+    <intrinsic>No legitimate access to any Delta system or network.</intrinsic>
+    <contextual>Targets the internet-facing SSO login page, Exchange Online endpoints, and VPN authentication portals.</contextual>
+    <persona_environment name="DeltaProduction" is_direct="FALSE">
+      <persona_role name="IT_User"/>
+      <narrative>The ExternalAdversary has no direct access but attempts to gain it by impersonating legitimate Delta employees through phishing, credential theft, or token hijacking. Success would give them the access rights of whichever employee they compromise.</narrative>
+    </persona_environment>
+  </persona>
+
+  <persona name="MaliciousInsider" type="Primary" assumption_persona="FALSE" image="">
+    <activities>Uses legitimate SSO credentials to access data outside their authorised scope. May exfiltrate HR or Finance records via approved file transfer channels to avoid DLP detection. Could share credentials with an external party or disable MFA on their own account if given the opportunity.</activities>
+    <attitudes>Current or former Delta employee with valid credentials. Acts out of financial pressure, personal grievance following a disciplinary action, or coercion by an external party. Familiar with internal systems and knows which data is valuable.</attitudes>
+    <aptitudes>Familiar with Delta internal network layout, business processes, and which systems hold the most sensitive data. Can blend malicious activity into normal usage patterns to avoid detection.</aptitudes>
+    <motivations>Financial incentive from selling data to a competitor or criminal broker. Personal grievance after a disciplinary action or redundancy notice. Coercion by an external threat actor who has leverage over the employee.</motivations>
+    <skills>Internal network navigation, use of approved tools for data exfiltration, knowledge of which audit events are monitored and which are not, social engineering of colleagues to obtain their credentials.</skills>
+    <intrinsic>Holds at least one valid Delta department role and has active SSO access.</intrinsic>
+    <contextual>Operates from within the Delta internal network, either on-site or via VPN from a personal device.</contextual>
+    <persona_environment name="DeltaProduction" is_direct="TRUE">
+      <persona_role name="HR_User"/>
+      <narrative>The MaliciousInsider exploits their existing legitimate access to reach data beyond their authorised scope, relying on the fact that normal usage activity provides cover for malicious data access if monitoring thresholds are not well calibrated.</narrative>
+    </persona_environment>
+  </persona>
+
+  <persona name="PrivilegedInsider" type="Primary" assumption_persona="FALSE" image="">
+    <activities>Could modify Entra ID role assignments to grant themselves or an accomplice elevated access. May attempt to tamper with or delete SIEM audit records to cover prior unauthorised access. Could create backdoor accounts or extract encryption keys from Azure Key Vault if access controls are misconfigured.</activities>
+    <attitudes>IT administrator with elevated privileges who abuses their position of trust. May act alone for personal gain or collude with an external party. Has deep knowledge of the Delta security architecture and knows where the blind spots are.</attitudes>
+    <aptitudes>Expert-level knowledge of Entra ID configuration, firewall rules, SIEM architecture, key management, and network segmentation. Can make changes that appear legitimate in isolation but create exploitable conditions over time.</aptitudes>
+    <motivations>Financial gain through data sale or extortion. Coercion by an external threat actor. Desire to cover up prior misconduct before a security audit. Ideological motivation in rare cases.</motivations>
+    <skills>Identity provider administration, log store access and manipulation, network reconfiguration, key extraction from Key Vault, creation of persistent backdoor access mechanisms.</skills>
+    <intrinsic>Holds the IT_Admin role with access to infrastructure management consoles, IdP configuration, and potentially the log storage infrastructure.</intrinsic>
+    <contextual>Works within the IT department; actions are difficult to distinguish from legitimate administrative work without strong separation of duties and independent log monitoring.</contextual>
+    <persona_environment name="DeltaProduction" is_direct="TRUE">
+      <persona_role name="IT_Admin"/>
+      <narrative>The PrivilegedInsider represents the highest-impact insider threat because their legitimate administrative access makes detection difficult. Mitigations must focus on separation of duties, independent audit log custody, and anomaly detection on privileged account actions.</narrative>
+    </persona_environment>
+  </persona>
+
+</usability>
+
+</cairis_model>
