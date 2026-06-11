@@ -1,0 +1,124 @@
+# install through pipx (https://pipx.pypa.io/stable/how-to/install-pipx/)\npipx install semgrep\n\n# or, install through uv (https://docs.astral.sh/uv/)\nuv tool install semgrep\n\n# confirm installation succeeded by printing the currently installed version\nsemgrep --version
+   15  semgrep login
+   16  # install through pipx (https://pipx.pypa.io/stable/how-to/install-pipx/)\npipx install semgrep\n\n# or, install through uv (https://docs.astral.sh/uv/)\nuv tool install semgrep\n\n# confirm installation succeeded by printing the currently installed version\nsemgrep --version
+   17  pipx install semgrep
+   18  uv tool install semgrep
+   19  pip install docker
+   20  gh  repo clone docker/docker-install
+   21  clear
+   22  docker pull semgrep/semgrep\n\n# confirm version\ndocker run --rm semgrep/semgrep semgrep --version
+   23  apt install docker-cli
+   24  sudo apt install
+   25  sudo apt update
+   26  apt list --upgradable
+   27  clear
+   28  sudo apt install gnome-terminal
+   29  sudo apt update
+   30  sudo apt install ca-certificates curl
+   31  sudo install -m 0755 -d /etc/apt/keyrings
+   32  sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc~
+   33  sudo chmod a+r /etc/apt/keyrings/docker.asc
+   34  sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+   35  sudo chmod a+r /etc/apt/keyrings/docker.asc
+   36  sudo apt install docker.io
+   37  sudo systemctl docker enable --now
+   38  sudo systemctl docker enable 
+   39  no
+   40  sudo systemctl docker enable --now
+   41  sudo systemctl docker.io enable --now
+   42  sudo apt-get update\nsudo apt-get install ./docker-desktop-amd64.deb
+   43  sudo apt-get update\nsudo apt-get install ./docker
+   44  systemctl --user start docker-desktop
+   45  sudo apt-get install ./docker-desktop-amd64.deb
+   46  clear
+   47  pipx install semgrep
+   48  uv tool install semgrep
+   49  semgrep --version
+   50  semgrep
+   51  pip install semgrep
+   52  sudp apt install semgrep
+   53  sudo apt install semgrep
+   54  sudo apt update
+   55  apt list --upgradable
+   56  pipx install semgrep
+   57  ls
+   58  cd
+   59  clear
+   60  ls
+   61  ls kali
+   62  ls
+   63  semgrep login
+   64  # install through pipx (https://pipx.pypa.io/stable/how-to/install-pipx/)\npipx install semgrep\n\n# or, install through uv (https://docs.astral.sh/uv/)\nuv tool install semgrep\n\n# confirm installation succeeded by printing the currently installed version\nsemgrep --version
+   65  semgrep login
+   66  clear
+   67  sudo apt install pipx
+   68  sudo apt install pipx -y
+   69  pipx ensurepath
+   70  ^[[200~docker --version
+   71  docker compose version
+   72  ~docker --version\ndocker compose version\n
+   73  docker --version
+   74  ^[[200~docker --version
+   75  docker compose version
+   76  apt install docker-cli
+   77  pip install semgrep
+   78  apt install semgrep
+   79  cd..
+   80  cd
+   81  pip install semgrep
+   82  ls
+   83  ls al
+   84  ls -al
+   85  ls
+   86  cd
+   87  clear
+   88  cd
+   89  pipx install semgrep\n
+   90  semgrep --version\n
+   91  semgrep login
+   92  history
+   93  clear
+   94  sudo apt update
+   95  sudo apt install -y docker.io\n
+   96  sudo systemctl enable docker --now\n
+   97  sudo systemctl docker --status
+   98  docker --version
+   99  sudo systemctl enable docker --now\n
+  100  sudo systemctl status  docker\n
+  101  semgrep login
+  102  cd
+  103  sudo apt update 
+  104  clear
+  105  sudo apt install nodejs
+  106  sudo apt install npm
+  107  nodejs -v
+  108  mpm -v
+  109  npm -v
+  110  clear 
+  111  git clone https://github.com/juice-shop/juice-shop.git
+  112  LS
+  113  ls
+  114  cd juice-shop
+  115  ls
+  116  npm install 
+  117  npm start
+  118  ls
+  119  npm install 
+  120  cd
+  121  sudo systemctl status  docker\n
+  122  clear
+  123  docker run --rm -it -p 80:80 vulnerables/web-dvwa\n
+  124  clear
+  125  docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep scan --config="p/owasp-top-10" --config="p/php"\n
+  126  docker run --rm
+  127  docker run --help
+  128  -v "${PWD}:/src"
+  129  v "${PWD}:/src"
+  130  "-v ${PWD}:/src"
+  131  cd
+  132  -v "${PWD}:/src"
+  133  semgrep scan
+  134  dvwa
+  135  ls
+  136  history
+  137  sudo systemctl status  docker\n
