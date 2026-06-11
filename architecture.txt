@@ -1,0 +1,44 @@
+[ SURFACE 1: WEB APPLICATION & ENDPOINT COMPROMISE ]
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │  Initial Infection   │ ◄─── Open Redirect / Malspam Attachment
+                    └──────────┬───────────┘      (e.g., Invoice_07-19-2023.zip)
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   Payload Download   │ ◄─── Fetches 'Scan_Inv.zip' from Firebase;
+                    └──────────┬───────────┘      Downloads disguised 'czx.jpg' via HTTP
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   C2 Communication   │ ◄─── IcedID Loader checks in with C2 domains
+                    └──────────┬───────────┘      (623start.site / skigimeetroc.com)
+                               │
+                               ▼
+         [ SURFACE 2: INTERNAL NETWORK & ACTIVE DIRECTORY PIVOT ]
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │     AD Discovery     │ ◄─── Workstation (10.7.10.47) broadcasts NBNS;
+                    └──────────┬───────────┘      LDAP query locates DC (10.7.10.9)
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │Kerberos Auth Exchange│ ◄─── Requesting Ticket Granting Tickets (TGT)
+                    └──────────┬───────────┘      exposing weak pre-authentication setup
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │  SMB Authentication  │ ◄─── SMB2 Session Setup established 
+                    └──────────┬───────────┘      with the Domain Controller
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │  DRSUAPI Discovery   │ ◄─── RPC Bind to Directory Replication Service
+                    └──────────┬───────────┘      Interface discovered
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │  Potential DCSync    │ ◄─── Critical Risk: Imminent extraction of
+                    └──────────────────────┘      Active Directory credential hashes (NTDS.dit)
